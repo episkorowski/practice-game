@@ -23,6 +23,7 @@ public class Obstacle implements GameObject{
         rectangle.bottom += y;
         rectangle2.top += y;
         rectangle2.bottom += y;
+
     }
 
     public Obstacle(int rectHeight, int color, int xStart, int yStart, int playerGap){
