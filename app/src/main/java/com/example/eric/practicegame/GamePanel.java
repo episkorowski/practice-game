@@ -37,7 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 
-        obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
+        obstacleManager = new ObstacleManager(250, 350, 75, Color.BLACK);
 
         setFocusable(true);
     }

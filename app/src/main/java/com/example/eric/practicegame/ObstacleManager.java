@@ -1,6 +1,8 @@
 package com.example.eric.practicegame;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,6 +21,8 @@ public class ObstacleManager {
 
     private long startTime;
     private long initTime;
+
+    private int score = 0;
 
     public ObstacleManager(int playerGap, int obstacleGap, int obstacleHeight, int color){
         this.playerGap = playerGap;
@@ -54,7 +58,7 @@ public class ObstacleManager {
     public void update(){
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         startTime = System.currentTimeMillis();
-        float speed = ((float)Math.sqrt((1+ startTime - initTime)/2000.0))*Constants.SCREEN_HEIGHT/(10000.0f);
+        float speed = ((float)Math.sqrt((1 + startTime - initTime)/2000.0))*Constants.SCREEN_HEIGHT/(10000.0f);
         for(Obstacle ob : obstacles){
             ob.incrementY(speed * elapsedTime);
         }
@@ -62,11 +66,16 @@ public class ObstacleManager {
             int xStart = (int) (Math.random()*(Constants.SCREEN_WIDTH - playerGap));
             obstacles.add(0, new Obstacle(obstacleHeight, color, xStart, obstacles.get(0).getRectangle().top - obstacleHeight - obstacleGap, playerGap));
             obstacles.remove(obstacles.size() - 1);
+            score++;
         }
     }
 
     public void draw(Canvas canvas){
         for(Obstacle ob : obstacles)
             ob.draw(canvas);
+        Paint paint = new Paint();
+        paint.setTextSize(80);
+        paint.setColor(Color.MAGENTA);
+        canvas.drawText("" + score, 50, 30 + paint.descent() - paint.ascent(), paint);
     }
 }
